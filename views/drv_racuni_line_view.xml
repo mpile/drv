@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <odoo>
+        <data>
+            <!-- tree view-->
+            <record id="drv_rline_tree_view" model="ir.ui.view">
+                <field name="name">drv.racun.line.tree</field>
+                <field name="model">drv.racun.line</field>  
+                <field name="arch" type="xml">
+                    <tree>
+                        <field name="drv_cena_id" />
+                        <field name="drv_cena_kol" />
+                        <field name="drv_jmere" />                        
+                        <field name="drv_cena_final" />  
+                        <field name="drv_stara_sifra" optional="hide" />  
+                        <field name="drv_stara_sifra_usluge" optional="hide" />                                                                      
+                    </tree>
+                </field>              
+            </record>
+            <!-- form view-->
+            <record id="drv_rline_form_view" model="ir.ui.view">
+                <field name="name">drv.racun.line.form</field>
+                <field name="model">drv.racun.line</field>  
+                <field name="arch" type="xml">
+                    <form>
+                        <sheet>
+                            <group>
+                                <field name="drv_cena_id" />
+                                <field name="drv_cena_kol" />
+                                <field name="drv_jmere" />                        
+                                <field name="drv_cena_final" />  
+                            </group>
+                        </sheet>                                                                     
+                    </form>
+                </field>              
+            </record>            
+            <!-- action windows-->
+            <record id="drv_racun_line_action" model="ir.actions.act_window">
+                <field name="type">ir.actions.act_window</field>
+                <field name="name">Stavke računa</field>    
+                <field name="res_model">drv.racun.line</field>  
+                <field name="view_mode">tree,form</field>  
+                <field name="help" type="html">
+                    <p class="o_view_nocontent_smiling_face">
+                        Napravi novu stavku racuna
+                    </p>               
+                </field>                                             
+            </record>
+            <!-- menu item -->
+            <menuitem name="Računi stavke" id="menuitem_racun_line" action="drv_racun_line_action" sequence="20" parent="drv_menuitem_racuni" />
+
+        </data>
+    </odoo>

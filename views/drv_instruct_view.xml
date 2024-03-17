@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id='drv_instruct_tree' model='ir.ui.view'>
+            <field name="name">drv.instruct.tree</field>
+            <field name="model">drv.instruct</field>  
+            <field name="arch" type="xml"> 
+              <tree>                
+                  <field name='name' string='Instruktor' />
+                  <field name='instruct_status' />                       
+              </tree>           
+            </field>                  
+        </record>    
+        <record id='drv_instruct_form' model='ir.ui.view'>
+            <field name="name">drv.instruct.form</field>
+            <field name="model">drv.instruct</field>  
+            <field name="arch" type="xml"> 
+              <form>
+                <sheet> 
+                  <group>
+                    <group>
+                        <field name='instruct_ime' string = 'Ime instruktora'/>
+                        <field name='instruct_prezime' string = 'Prezime instruktora'/>  
+                        <field name='instruct_status' />                                           
+                    </group>  
+                  </group>              
+                </sheet>
+              </form>           
+            </field>                  
+        </record>
+        <record id="drv_instruct_action" model="ir.actions.act_window">
+            <field name="name">Instruktori</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">drv.instruct</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Create a new candidate in your address book
+              </p><p>
+                Odoo helps you easily track all activities related to a customer.
+              </p>
+            </field>
+        </record>   
+          
+        <menuitem id="menu_drv_instruct" name="Instruktori" action="drv_instruct_action" parent="drv_menuitem_instruct"  sequence="14"/>                   
+    </data>
+</odoo>        

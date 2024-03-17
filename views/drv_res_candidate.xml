@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- petak 15. mart 2024 -->
+    <record id="drv_view_candidate_calendar" model="ir.ui.view">
+        <field name="name">drv.candidate.calendar</field>
+        <field name="model">drv.candidate</field>
+        <field name="arch" type="xml">
+            <calendar string="Kandidati" date_start="datum_upisa" mode="month">
+                <field name="drv_category" />
+            </calendar>
+        </field>
+    </record>  
+        <!-- petak 15. mart 2024 -->
+        <record id="drv_view_graph_candidate" model="ir.ui.view">
+            <field name="name">drv.candidate.graph</field>
+            <field name="model">drv.candidate</field>
+            <field name="arch" type="xml">
+                <graph string="Broj upisanih kandidata po godini">
+                    <field name="name" type="row"></field>
+                    <field name="datum_upisa" interval="year" type="col"></field>                    
+                </graph>
+            </field>
+        </record>
+        <!-- drv_candidate kanban view 26. jan 2024 -->   
+        <record id="drv_candidate_kanban_view"  model="ir.ui.view">
+            <field name="name">drv.candidate.kanban</field>
+            <field name="model">drv.candidate</field>
+            <field name="arch" type="xml"> 
+                <kanban default_order ="datum_upisa desc">    
+                    <field name="name" string = "Kandidat" />  
+                    <templates>
+                            <t t-name="kanban-box">
+                                <div t-attf-class="oe_kanban_global_click"> <!-- pojavljuju se linijice bez teksta-->
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <strong>
+                                                <field name="name" />
+                                            </strong>
+                                        </div>
+                                    </div>
+                                </div>
+                            </t>
+                    </templates>                    
+                 </kanban>                                                                                                                            
+            </field>
+        </record>     
+        <!-- search view -->   
+        <record id="drv_view_search_candidate"  model="ir.ui.view">
+            <field name="name">drv.candidate.search</field>
+            <field name="model">drv.candidate</field>
+            <field name="arch" type="xml"> 
+                <search>    
+                    <field name="prezime" string = "Prezime" /> 
+                    <field name="drv_category" /> 
+                    <field name="datum_upisa" />     
+                    <field name="adresa_stanovanja" />  
+                    <field name="id_candidate" />                     
+                    <filter name="group_cat_id" string="Kategorija"  context="{'group_by':'drv_category'}"/>      
+                    <filter name="group_mesto_id" string="Mesto"  context="{'group_by':'mesto_stanovanja'}"/>  
+                    <filter name="group_godina_id" string="Godina"  context="{'group_by':'godina'}"/>     
+                    <filter string="Upisani ove godine" name="year" domain="[('datum_upisa','&lt;=', time.strftime('%%Y-12-31')),('datum_upisa','&gt;=',time.strftime('%%Y-01-01'))]" />    
+                    <filter string="Upisani danas" name = "Danas" separator="1" domain="[('datum_upisa','&lt;=',(datetime.date.today()).strftime('%Y-%m-%d')),('datum_upisa','&gt;=',(datetime.date.today()).strftime('%Y-%m-%d'))]"  />                                                                                                                                                                                                                                                                                                         
+                    <filter	string="Upisani ovog meseca" name="month" domain="[('datum_upisa','&lt;=',(datetime.date.today()+relativedelta(day=31)).strftime('%Y-%m-%d')),('datum_upisa','&gt;=',(datetime.date.today()-relativedelta(day=1)).strftime('%Y-%m-%d'))]"   />                             
+                </search>                                                                                                                            
+            </field>
+        </record>     
+        <!-- form view -->   
+        <record id="drv_view_form_candidater"  model="ir.ui.view">
+            <field name="name">drv.candidate.form</field>
+            <field name="model">drv.candidate</field>
+            <field name="arch" type="xml"> 
+                <form>
+                <sheet>
+                <group col='3'> 
+                    <group>                 
+                        <field name="id_candidate" string = "Id kandidata" />
+                        <field name="number_inside_year" string = "Broj u godini" />
+                        <field name="godina" string = "Godina" />  
+                        <field name="datum_upisa" string = "Datum upisa" default_focus="1" />      
+                        <field name="drv_category" string = "Kategorija" />  
+                        <field name="prezime" string = "Prezime" />                        
+                        <field name="ime_roditelja" string = "Ime roditelja" />  
+                        <field name="ime" string = "Ime" />  
+                        <field name="adresa_stanovanja" string = "Adresa stanovanja" />     
+                        <field name="mesto_stanovanja" string = "Mesto stanovanja" />                                               
+                    </group> 
+                    <group>  
+                        <field name="telefon_mobilni" string = "Telefon mobilni" />  
+                        <field name="telefon_fiksni" string = "Telefon fiksni" /> 
+                        <field name="email" string = "Email" />                                                                                              
+                        <field name="datum_rodjenja" string = "Datum rodjenja" />    
+                        <field name="mesto_rodjenja" string = "Mesto rodjenja" /> 
+                        <field name="jmbg" string = "Matični broj" />                        
+                        <field name="brlk" string = "Broj lične karte" /> 
+                        <field name="pu" string = "MUP" />    
+                        <field name="drzavljanin" string = "Državljanstvo" />  
+                        <field name="instruct_id" string = "Instruktor" />                                                  
+                    </group>  
+                    <group> 
+                        <field name="image" widget="image" class="oe_avatar"/>                    
+                        <field name="dosao" string = "Došao iz druge auto - škole" /> 
+                        <field name="ispisan" string = "Ispisan" />   
+                        <field name="vec_ima_polozeno" string = "Prethodno položene kategorije" widget="many2many_tags" />  
+                        <field name="komentar" string = "Komentar" />                                                                                                                   
+                    </group>                      
+              </group>                                                                                                                                                                
+                <notebook>	
+                    <page string='Lekarsko uverenje'>	
+                        <label for="broj_lekarskog" string="Broj"/>
+                        <field name='broj_lekarskog' />
+                        <label for='datum_lekarskog_od' string="Važi od"/>                        
+                        <field name='datum_lekarskog_od' />
+                        <label for='vazenje_lekarskog' string="Broj meseci"/>                          
+                        <field name='vazenje_lekarskog' />
+                        <label for='datum_lekarskog_do' string="Važi do"/>                             
+                        <field name='datum_lekarskog_do' />
+                        <label for='lekarsko_izdala_ustanova' string="Izdala ustanova"/>                         
+                        <field name='lekarsko_izdala_ustanova' />
+                    </page>
+                    <page string='Teorijska obuka'>	
+                        <label for="datum_to_od" string="Datum od"/>
+                        <field name='datum_to_od' />
+                        <label for='datum_to_do' string="Datum do"/>                        
+                        <field name='datum_to_do' />
+                        <label for='broj_casova_to' string="Broj časova"/>                          
+                        <field name='broj_casova_to' />
+                    </page>                       
+                    <page string='Praktična obuka'>	
+                        <label for="datum_po_od" string="Datum od"/>
+                        <field name='datum_po_od' />
+                        <label for='datum_po_do' string="Datum do"/>                        
+                        <field name='datum_po_do' />
+                        <label for='broj_casova_po' string="Broj časova"/>                          
+                        <field name='broj_casova_po' />
+                    </page>   
+                    <page string='Prijave ispita'>	
+                        <field name = 'ti_line_childs' context="{'tree_view_ref':'drv.drv_query_ti_line_tree'}" />
+                    </page>       
+                    <page string='Uplate'>	
+                        <field name = 'rn_line_childs' context="{'tree_view_ref':'drv.drv_query_racun_line_tree'}" />
+                    </page>                      
+                    <page string='Položio ispite'>
+                        <label for="datum_polozio_teoriju" string="Datum položio"/>
+                        <field name='datum_polozio_teoriju' />
+                        <label for="datum_polozio_voznju" string="Datum položio vožnju"/>
+                        <field name='datum_polozio_voznju' />                        
+                    </page>                                                                                             
+                </notebook>                               
+                </sheet>                                                                    
+                </form>                                                                                                                            
+            </field>
+        </record> 
+        <!-- tree view -->            
+        <record id="drv_view_tree_candidate" model="ir.ui.view">
+        <field name="name">drv.candidate.tree</field>
+        <field name="model">drv.candidate</field>
+        <field name="arch" type="xml">        
+                <tree  string="Kandidati" default_order ="datum_upisa desc">
+                    <field name="id_candidate" string = "Id kandidata" class="text-center" />
+                    <field name="number_inside_year" string = "Broj u godini"  optional="hide" />
+                    <field name="godina" string = "Godina"  optional="hide" />  
+                    <field name="datum_upisa" string = "Datum upisa" />  
+                    <field name="drv_category" string = "Kat." />  
+                    <field name="prezime" string = "Prezime" />                      
+                    <field name="ime_roditelja" string = "Ime roditelja" />  
+                    <field name="ime" string = "Ime" />
+                    <field name="datum_rodjenja" string = "Datum rodjenja" /> 
+                    <field name="mesto_rodjenja" string = "Mesto rodjenja" optional="hide" />  
+                    <field name="jmbg" string = "Matični broj" optional="show" />                           
+                    <field name="brlk" string = "Broj lične karte" optional="show" />       
+                    <field name="pu" string = "PU" optional="hide" />  
+                    <field name="adresa_stanovanja" string = "Adresa" optional="show" />  
+                    <field name="mesto_stanovanja" string = "Mesto" optional="show" />  
+                    <field name="drzavljanin" string = "Državljanstvo" optional="hide" />  
+                    <field name="telefon_mobilni" string = "Telefon mobilni" />  
+                    <field name="telefon_fiksni" string = "Telefon fiksni" optional="hide" />   
+                    <field name="company_id" string = "Preduzeće" optional="hide" />  
+                    <field name='broj_lekarskog' string = "Broj lekarskog" optional="hide" /> 
+                    <field name='datum_lekarskog_od' string = "Datum lekarskog od" optional="hide" />   
+                    <field name='vazenje_lekarskog' string = "Važenje u mesecima" optional="hide" />   
+                    <field name='datum_lekarskog_do' string = "Datum lekarskog do" optional="hide" />  
+                    <field name='lekarsko_izdala_ustanova' string = "Lekarsko izdala ustanova" optional="hide" />                                                                                                                                                                                                                                                                                                                                                                            
+                </tree>        
+        </field>
+        </record>
+        <record id="drv_candidate_action" model="ir.actions.act_window">
+            <field name="name">Kandidati</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">drv.candidate</field>
+            <field name="view_mode">kanban,tree,form,graph,calendar</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Create a new candidate in your address book
+              </p><p>
+                Odoo helps you easily track all activities related to a customer.
+              </p>
+            </field>
+        </record>    
+        <menuitem id="menu_drv_candidate" name="Kandidati" action="drv_candidate_action" parent="drv_menuitem_kandidati" sequence="1"/>    
+    </data>
+</odoo>    

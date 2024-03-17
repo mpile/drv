@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="candidate_report_action" model="ir.actions.report">
+            <field name="model">drv.candidate</field>
+            <field name="name">candi</field> 
+            <field name="report_type">qweb-pdf</field>    
+            <field name="report_name">drv.report_candidate_template</field>
+            <field name="report_file">drv.report_candidate_template</field>     
+            <field name="binding_model_id" ref="model_drv_candidate"/>   
+            <field name="binding_type">report</field>   
+            <field name="print_report_name">'Matični podaci o kandidatu - %s' % (object.name)</field>                                                                                                               
+        </record>
+
+        <template id="report_candidate_template">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <div class="article o_report_layout_standard" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id">
+                        <t t-call="drv.external_layout_standard_custom"/>
+                        <div class="page">
+                            <h2>Matični podaci kandidata</h2>
+                            <p>Ime kandidata: <span t-field="o.name"/></p>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </template>      
+
+    </data>
+</odoo>       
+    

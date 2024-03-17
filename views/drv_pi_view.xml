@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id='drv_pi_tree_view' model='ir.ui.view'>
+            <field name="name">drv.pi.tree</field>
+            <field name="model">drv.pi</field>  
+            <field name="arch" type="xml"> 
+              <tree>
+                     <header>
+                        <button name="pi_uradi_update" string="Update stavke" type = "object" class="btn-primary"/>   
+                        <button name="pi_update_kandidati" string="Update kandidati" type = "object" class="btn-primary"/>                                              
+                    </header>               
+                  <field name='pi_dat' string = 'Datum polaganja'/>
+                  <field name='pi_status' />                            
+              </tree>           
+            </field>                  
+        </record>    
+        <record id='drv_pi_form_view' model='ir.ui.view'>
+            <field name="name">drv.pi.form</field>
+            <field name="model">drv.pi</field>  
+            <field name="arch" type="xml"> 
+              <form>
+                <sheet> 
+                    <group>
+                      <group>
+                          <field name='pi_dat' string = 'Datum polaganja'/>
+                      </group>
+                      <group>                      
+                          <field name='pi_status' string = 'Status ispita' />  
+                      </group>                          
+                    </group> 
+                  <notebook>
+                    <page string='Prijave ispita kandidata'>
+                      <field name='pi_child_ids' context="{'tree_view_ref':'drv.drv_pi_line_tree_view','form_view_ref':'drv.drv_pi_line_form_view'}"/>
+                    </page>
+                  </notebook>                                                           
+                </sheet>
+              </form>           
+            </field>                  
+        </record>
+        <record id="drv_pi_action" model="ir.actions.act_window">
+            <field name="name">Praktični ispiti</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">drv.pi</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Unesite novi datum polaganja praktičnog ispita
+              </p>
+            </field>
+        </record> 
+        <record id="drv_pi_line_action" model="ir.actions.act_window">
+            <field name="name">Stavke - praktični ispit</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">drv.pi.line</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Unesite novu prijavu za praktični ispit
+              </p>
+            </field>
+        </record>          
+
+        <menuitem id="menu_drv_pi" name="Praktični ispiti" action="drv_pi_action" parent="drv_menuitem_pi" sequence="210"/> 
+        <menuitem id="menu_drv_pi_line" name="Prijave za praktični deo ispita" action="drv_pi_line_action" parent="drv_menuitem_pi" sequence="310" groups="base.group_no_one" />                             
+    </data>
+</odoo>        

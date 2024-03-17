@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="pi_report_action" model="ir.actions.report">
+            <field name="model">drv.pi</field>
+            <field name="name">Izvještaj sa polaganja praktičnog dijela ispita</field> 
+            <field name="report_type">qweb-pdf</field> 
+            <!-- custom pager format -->                                    
+            <field name="report_name">drv.report_pi_template</field>
+            <field name="report_file">drv.report_pi_template</field>     
+            <field name="binding_model_id" ref="model_drv_pi"/>   
+            <field name="binding_type">report</field>   
+            <field name="print_report_name">'Vožnja- %s' % (object.name)</field>     
+            <field name="paperformat_id" ref="asm_landscape">
+            </field>                                                                                                                                                      
+        </record>
+
+        <template id='custom__header_footer_layout'  inherit_id='web.external_layout_striped'>
+            <xpath expr="//div[1]" position="replace"> <!-- zamena-->
+
+                    <div t-attf-class="o_company_#{company.id}_layout header" t-att-style="report_header_style">
+                    <div class="o_background_header" style="position:absolute;">
+                        <div class="float-right">
+                    <h3 class="mt0 text-right" t-field="company.report_header"/>
+                    </div>
+                    <div class="header_content float-right">
+                    <div class="logo" style="">
+                        <img t-if="company.logo" style="max-width:260px;max-height:89px;" t-att-src="image_data_uri(company.logo)" class="float-left" alt="Logo"/>
+                        </div>
+                        </div>
+                        <div class="float-left">
+                        <div class="details">
+
+                    </div>
+                        </div>
+                    </div>
+                    </div>          
+            </xpath>        
+        </template>
+
+        <template id="report_pi_template" priority = "23">
+            <!-- setovanje vrednosti za company -->           
+            <t t-set="company" t-value="user.company_id"/>
+            <t t-call="web.html_container">             
+                <t t-foreach="docs" t-as="o">                  
+                            <t t-call="drv.external_layout_striped">     
+                                <!-- heder je ispred page-a -->                                                                              
+                                <div class="page">
+                                    <br />                        
+                                    <!-- -->                            
+                                    <!-- Stampanje table linija. U tr se stavlja t-forach t-as -->
+                                    <!-- -->                            
+                                    <table class="table table-sm">
+                                        <thead>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+                                      
+                                            <tr>
+                                                <th>Rbr.</th>
+                                                <th width="18%">Kandidat</th>   
+                                                <th>Kat.</th>  
+                                                <th>Datum<br /> rodjenja</th> 
+                                                <th width="14%">Broj lične karte - MUP</th> 
+                                                <th width="9%">P. obuka od <br />P. obuka do</th>  
+                                                <th>Položio teoriju</th>                                                                                                                                                                                               
+                                                <th width="13%">Broj i datum izdavanja ljekarskog ujerenja</th> 
+                                                <th width="7%">Broj polaganja</th>                                                                                            
+                                                <th width="14%">Upravlajnje vozilom<br />Poligon Grad Ukupno</th>  
+                                                <th width="6%">Konačan uspjeh</th>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr t-foreach="o.pi_child_ids" t-as="line"> 
+                                                <td style="text-align: right;"><span t-esc="line_index + 1"/></td>                                 
+                                                <td><span t-field="line.pi_candidate_id.name"/></td>   
+                                                <td><span t-field="line.pi_id_drv_category"/></td> 
+                                                <td><span t-field="line.pi_datum_rodjenja"/></td> 
+                                                <td>
+                                                    <t t-if="line.pi_id_brlk">                                                 
+                                                        <span t-field="line.pi_id_brlk"/> 
+                                                    </t>
+                                                    <t t-if="line.pi_id_pu">
+                                                        &#160;<span t-field="line.pi_id_pu"/>
+                                                    </t> 
+                                                </td> 
+
+                                                <td><span t-field="line.pi_line_datum_po_od"/><br /> 
+                                                    <span t-field="line.pi_line_datum_po_do"/>
+                                                </td>                                                                                              
+                                                <td><span t-field="line.pi_line_datumpolt"/></td>                                                   
+                                                <td>
+                                                    <t t-if="line.pi_line_brojlekarskog">
+                                                        <span t-field="line.pi_line_brojlekarskog"/>
+                                                    </t>
+                                                    <t t-if="line.pi_line_datumlekarskogod">
+                                                        &#160;<span t-field="line.pi_line_datumlekarskogod"/>
+                                                    </t>                                                                                                        
+                                                </td> 
+                                                <td style="text-align:right;">
+                                                    <span t-field="line.pi_line_brojpolaganja"/>
+                                                </td>                                                                                                                                                   
+                                                <td>
+                                                    <img  t-att-src="'/drv/static/img/asm_poligon.png'" style="max-height: 40px;" />
+                                                    <img  t-att-src="'/drv/static/img/asm_poligon.png'" style="max-height: 40px;" />
+                                                    <img  t-att-src="'/drv/static/img/asm_poligon.png'" style="max-height: 40px;" />
+                                                </td>   
+                                                <td>
+                                                </td>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+                                            </tr>
+                                        </tbody>
+                                    </table>   
+                                    <!-- 16 jan 2024 , 12 feb 2024  footer je unutar page-a -skolino footer-->
+                                                                        
+                                </div>                                                           
+                            </t>
+                </t>                   
+            </t>            
+        </template>  
+
+
+
+       
+
+
+          
+    </data>
+  
+</odoo>

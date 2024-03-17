@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id='drv_query_pi_line_tree' model='ir.ui.view'>
+            <field name="name">drv.sql.pi.tree</field>
+            <field name="model">drv.sql.pi</field>  
+            <field name="arch" type="xml"> 
+              <tree edit="0">
+                  <field name='pi_parent_id' string = 'Datum pračtičnog ispita'/>    
+                  <field name='pi_candidate_id' string = 'Kandidat' invisible='0'/>  
+                  <field name='pi_status' string = 'Status'/>                   
+                  <field name='pi_datum_prijave' string = 'Datum prijave'/>  
+                  <field name='vrsta_ispita' string = 'Vrsta ispita'/>  
+                  <field name='pi_line_datumispita' string = 'Datum'/>                                                                               
+              </tree>           
+            </field>                  
+        </record>    
+
+        <record id="drv_query_pi_action" model="ir.actions.act_window">
+            <field name="name">Query Praktični ispiti</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">drv.sql.pi</field>
+            <field name="view_mode">tree</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Create a new candidate in your address book
+              </p><p>
+                Odoo helps you easily track all activities related to a customer.
+              </p>
+            </field>
+        </record>             
+        <menuitem id="menu_drv_query_pi" name="Query Praktični ispiti" action="drv_query_pi_action" parent="drv_menuitem_kandidati" sequence="900" groups='base.group_no_one' />                    
+    </data>
+</odoo>        

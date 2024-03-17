@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id='drv_cenovnik_tree' model='ir.ui.view'>
+            <field name="name">drv.cena.tree</field>
+            <field name="model">drv.cena</field>  
+            <field name="arch" type="xml"> 
+              <tree>                
+                    <field name="name" string='Naziiv usluge'></field>
+                    <field name="drv_cena_bez_poreza" string='Cena'  optional="hide" />  
+                    <field name="drv_procenat" string='Procenat poreza'  optional="hide" />  
+                    <field name="drv_porez" string='Porez'  optional="hide" />  
+                    <field name="drv_cena_sa_porezom" string='Cena sa porezom'  optional="hide" />  
+                    <field name="drv_moto_cas" string="Moto čas"  optional="hide" />  
+                    <field name="dvr_aktivna" string="Usluga je aktivna"  optional="hide" />  
+                    <field name="drv_redosled" string="Redosled"  optional="hide" />  
+                    <field name="drv_prijava" string="Prijava ispita"  optional="hide" />  
+                    <field name="drv_jed_mere" string="Jedinica mere"  optional="hide" />  
+                    <field name="drv_sifra_stara" string="Šifra stara"   optional="hide" />                       
+              </tree>           
+            </field>                  
+        </record>  
+        <record id='drv_cenovnik_form' model='ir.ui.view'>
+            <field name="name">drv.cena.form</field>
+            <field name="model">drv.cena</field>  
+            <field name="arch" type="xml"> 
+              <form>
+                <sheet> 
+                  <group>
+                    <group>
+                        <field name='name' string = 'Naziv usluge'/>
+                        <field name='drv_cena_bez_poreza' string = 'Cena'/>                                           
+                    </group>  
+                  </group>              
+                </sheet>
+              </form>           
+            </field>                  
+        </record>	           
+        <record id="drv_cenovnik_action" model="ir.actions.act_window">
+            <field name="name">Vrste usluga</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">drv.cena</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Unesite novu vrstu usluge
+              </p>
+            </field>
+        </record>   
+          
+        <menuitem id="menu_drv_cena" name="Vrste usluga" action="drv_cenovnik_action" parent="drv_menuitem_racuni" sequence="30"/>                   
+    </data>
+</odoo>        

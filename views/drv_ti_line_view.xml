@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id='drv_ti_line_tree_view' model='ir.ui.view'>
+            <field name="name">drv.ti.line.tree</field>
+            <field name="model">drv.ti.line</field>  
+            <field name="arch" type="xml"> 
+                <tree>                  
+                    <field name='id' optional='hide'/>   
+                    <field name='ti_candidate_id' string='Prezime ime roditelja i ime kandidata' />  
+                    <field name='ti_id_drv_category' string='Kat' />   
+                    <field name='ti_datum_rodjenja' string='Datum rodjenja' />   
+                    <field name='ti_line_brlk_pu' string='Broj L.K.' />   
+                    <field name='datum_prijave' string='Datum prijave' />                                                                                                   
+                    <field name='ti_line_lekarsko' string='Lekarsko' /> 
+                    <field name='ti_line_brojpolaganja' string='Broj polaganja' /> 
+                    <field name='ti_line_brojpoena' string='Broj poena' />                                         
+                    <field name='status' string='Ostvaren uspjeh' />                                                                              
+                </tree>   
+            </field>               
+        </record>    
+        <record id='drv_ti_line_form_view' model='ir.ui.view'>
+            <field name="name">drv.ti.line.form</field>
+            <field name="model">drv.ti.line</field>  
+            <field name="arch" type="xml"> 
+                <form> 
+                    <sheet>  
+                        <group>                 
+
+                            <field name='ti_candidate_id' string='Prezime ime roditelja i ime kandidata' />  
+                            <field name='datum_prijave'  string='Datum prijave' />  
+                            <field name='ti_line_brojpolaganja'  string='Broj polaganja' style="text-align:right;"/>    
+                            <field name='ti_line_brojpoena'  string='Ostvareni broj poena' />   
+                            <field name='status'  string='Status' />                                                                                        
+                        </group>
+                    </sheet>                                                              
+                </form>   
+            </field>               
+        </record>             
+    </data>
+</odoo>        

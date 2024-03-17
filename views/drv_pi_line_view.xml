@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id='drv_pi_line_tree_view' model='ir.ui.view'>
+            <field name="name">drv.pi.line.tree</field>
+            <field name="model">drv.pi.line</field>  
+            <field name="arch" type="xml"> 
+                <tree>                   
+                    <field name='pi_candidate_id' string='Prezime ime roditelja i ime kandidata' />  
+                    <field name='pi_id_drv_category' string='Kat' />   
+                    <field name='pi_datum_rodjenja' string='Datum rodjenja' />   
+                    <field name='pi_id_brlk' string='Brlk' />   
+                    <field name='pi_id_pu' string='MUP' />   
+                    <field name='pi_line_datum_po_od' string='P. obuka od' />  
+                    <field name='pi_line_datum_po_do' string='P. obuka do' /> 
+                    <field name='pi_line_datumpolt' string='Polozio teoriju' />                                                                                     
+                    <field name='pi_line_lekarsko' string='Broj i datum lekarskog' /> 
+                    <field name='pi_line_brojpolaganja' string='Koji put polaze' />                         
+                    <field name='pi_status_candidate' string='Konačni uspjeh' />                                                                                                                                                                                                                                                                                           
+                </tree>   
+            </field>               
+        </record>    
+        <record id='drv_pi_line_form_view' model='ir.ui.view'>
+            <field name="name">drv.pi.line.form</field>
+            <field name="model">drv.pi.line</field>  
+            <field name="arch" type="xml"> 
+                <form>    
+                    <sheet>
+                        <group>
+                            <field name='pi_candidate_id' string='Prezime ime roditelja i ime kandidata' /> 
+                            <field name='pi_datum_prijave'  string='Datum prijave' />  
+                            <field name='pi_line_brojpolaganja'  string='Broj polaganja' />     
+                            <field name='pi_status_candidate'  string='Status' />                                                       
+                        </group>
+                    </sheet>                                                          
+                </form>   
+            </field>               
+        </record>             
+    </data>
+</odoo>        

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoded="utf-8"?>
+<odoo>
+    <data>
+        <!-- form vieww -->
+        <record model="ir.ui.view" id="drv_dash_form">
+            <field name="name">board.board.drvdash</field>
+            <field name="model">board.board</field> 
+            <field name="arch" type="xml">
+                <form>
+                    <dashboard>
+                    </dashboard>
+                </form>
+            </field>        
+        </record>
+        <!-- action --> 
+        <record model="ir.actions.act_window" id="drv_dash_action">
+            <field name="res_model">board.board</field>
+            <field name="type">form</field>
+        </record>        
+        <!-- menuitem-->  
+        <menuitem id="menuitem_drv_dash" name="Dashboard" action="drv_dash_action" parent="drv_menuitem_dash" sequence="1"/>       
+    </data>
+</odoo>

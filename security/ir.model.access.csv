@@ -1,0 +1,15 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_drv_candidate,access.drv.candidate,drv.model_drv_candidate,base.group_user,1,1,1,1
+access_drv_ti,access.drv.ti,drv.model_drv_ti,base.group_user,1,1,1,1
+access_drv_ti_line,access.drv.ti_line,drv.model_drv_ti_line,base.group_user,1,1,1,1
+access_drv_sql_ti,access.drv.sql.ti,drv.model_drv_sql_ti,base.group_user,1,1,1,1
+access_drv_instruct,access.drv.instruct,drv.model_drv_instruct,base.group_user,1,1,1,1
+access_drv_cena,access.drv.cena,drv.model_drv_cena,base.group_user,1,1,1,1
+access_drv_pi,access.drv.pi,drv.model_drv_pi,base.group_user,1,1,1,1
+access_drv_pi_line,access.drv.pi.line,drv.model_drv_pi_line,base.group_user,1,1,1,1
+access_drv_racun,access.drv.racun,drv.model_drv_racun,base.group_user,1,1,1,1
+access_drv_racun_line,access.drv.racun.line,drv.model_drv_racun_line,base.group_user,1,1,1,1
+access_drv_cat,access.drv.cat,drv.model_drv_cat,base.group_user,1,1,1,1
+access_drv_sql_pi,access.drv.sql.pi,drv.model_drv_sql_pi,base.group_user,1,1,1,1
+access_drv_sql_racun,access.drv.sql.racun,drv.model_drv_sql_racun,base.group_user,1,1,1,1
+access_drv_sql_svjed,access.drv.sql.svjed,drv.model_drv_sql_svjed,base.group_user,1,1,1,1

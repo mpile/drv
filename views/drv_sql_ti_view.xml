@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id='drv_query_ti_tree' model='ir.ui.view'>
+            <field name="name">drv.sql.ti.tree</field>
+            <field name="model">drv.sql.ti</field>  
+            <field name="arch" type="xml"> 
+              <tree create="false" delete="false" editable="bottom">
+                  <field name='vrsta_ispita' string = 'Vrsta ispita' readonly="1"/>                
+                  <field name='sql_dat' string = 'Datum ispita' readonly="1"/>         
+                  <field name='ti_candidate_id' string = 'Kandidat' invisible='0' readonly="1"/>       
+                  <field name='status' string = 'Status' readonly="1"/>                        
+                  <field name='datum_prijave' invisible="1" string = 'Datum prijave'  readonly="1"/>                                                                                        
+              </tree>           
+            </field>                  
+        </record>    
+
+        <record id="drv_query_ti_action" model="ir.actions.act_window">
+            <field name="name">Query Teorijski ispiti</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">drv.sql.ti</field>
+            <field name="view_mode">tree</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Create a new candidate in your address book
+              </p><p>
+                Odoo helps you easily track all activities related to a customer.
+              </p>
+            </field>
+        </record>             
+        <menuitem id="menu_drv_query_ti" name="Query Teorijski ispiti" action="drv_query_ti_action" parent="drv_menuitem_kandidati" sequence="900" groups='base.group_no_one' />                    
+    </data>
+</odoo>        

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="svjed_report_action" model="ir.actions.report">
+            <field name="model">drv.pi</field>
+            <field name="name">Spisak izdatih svjedočanstava</field> 
+            <field name="report_type">qweb-pdf</field> 
+            <!-- custom pager format -->                                    
+            <field name="report_name">drv.report_svjed_template</field>
+            <field name="report_file">drv.report_svjed_template</field>     
+            <field name="binding_model_id" ref="model_drv_pi"/>   
+            <field name="binding_type">report</field>   
+            <field name="print_report_name">'Svjedočanstva- %s' % (object.name)</field>     
+            <field name="paperformat_id" ref="asm_portrait">
+            </field>                                                                                                                                                      
+        </record>
+
+
+
+        <template id="report_svjed_template" priority = "23">
+            <!-- setovanje vrednosti za company -->           
+            <t t-set="company" t-value="user.company_id"/>
+            <t t-call="web.html_container">             
+                <t t-foreach="docs" t-as="o">                  
+                            <t t-call="drv.svjed_layout_striped">     
+                                <!-- heder je ispred page-a -->                                                                              
+                                <div class="page">
+                                    <br />                        
+                                    <!-- -->                            
+                                    <!-- Stampanje table linija. U tr se stavlja t-forach t-as -->
+                                    <!-- -->                            
+                                    <table class="table table-sm">
+                                        <thead>                                         
+                                            <tr>
+                                                <th width="6%">Rbr.</th>   
+                                                <th width="40%" style="text-align:left;">Kandidat</th>   
+                                                <th width="16%" style="text-align:left;">Kategorija</th> 
+                                                <th width="12%" style="text-align:left;">Broj svjedočanstva</th>  
+                                                <th width="12%" style="text-align:left;">Datum svjedočanstva</th>  
+                                                <th with="14%" style="text-align:left;">Mjesto</th>  
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr t-foreach="o.svjed_child_ids" t-as="line"> 
+                                                <td style="text-align: right;"><span t-esc="line_index + 1"/></td>                                 
+                                                <td><span t-field="line.svjed_candidate_id.name"/></td>   
+                                                <td><span t-field="line.svjed_drv_category"/></td>   
+                                                <td><span t-field="line.svjed_id_candidate"/></td>  
+                                                <td><span t-field="line.svjed_datum"/></td>    
+                                                <td><span t-field="company.city"/></td>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+                                            </tr>
+                                        </tbody>
+                                    </table>   
+                                    <!-- 16 jan 2024 , 12 feb 2024  footer je unutar page-a -skolino footer-->
+                                                                        
+                                </div>                                                           
+                            </t>
+                </t>                   
+            </t>            
+        </template>  
+
+
+
+       
+
+
+          
+    </data>
+  
+</odoo>

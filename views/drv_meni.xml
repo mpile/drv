@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+    <!-- Top menu item -->
+    <menuitem name="Askola" id="drv_menu_root"  sequence="4"/>
+    <!-- menu categories -->
+    <menuitem name="Kandidati" id="drv_menuitem_kandidati" parent="drv_menu_root" sequence="5"/>
+     <!--<menuitem name="Instruktori" id="drv_menuitem_instruktori" parent="drv_menu_root"/>   --> 
+    <menuitem name="Teorijski ispiti" id="drv_menuitem_ti" parent="drv_menu_root" sequence="6"/> 
+         <!--Praktični ispiti   --> 
+    <menuitem name="Praktični ispiti" id="drv_menuitem_pi" parent="drv_menu_root" sequence="7"/>
+          <!--Instruktori   -->           
+    <menuitem name="Instruktori" id="drv_menuitem_instruct" parent="drv_menu_root" sequence="8"/> 
+         <!--Računi  -->     
+    <menuitem name="Uplate" id="drv_menuitem_racuni" parent="drv_menu_root" sequence="9"/>  
+         <!--Konfiguracija -->         
+    <menuitem name="Konfiguracija" id = "drv_menuitem_postavke" parent="drv_menu_root" sequence="10"/>   
+         <!--Konfiguracija -->         
+    <menuitem name="Dashboard" id = "drv_menuitem_dash" parent="drv_menu_root" sequence="100"/>                     
+  </data>
+</odoo>

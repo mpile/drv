@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id='drv_ti_form_view' model='ir.ui.view'>
+            <field name="name">drv.ti.form</field>
+            <field name="model">drv.ti</field>  
+            <field name="arch" type="xml"> 
+              <form>
+                <sheet> 
+                    <group>
+                      <group>
+                          <field name='dat' string = 'Datum polaganja'/>
+                      </group>
+                      <group>                      
+                          <field name='ti_status' string = 'Status ispita' />  
+                      </group>                          
+                    </group>   
+                  <notebook>
+                    <page string='Prijave ispita kandidata'>
+                      <field name='ti_child_ids' context="{'tree_view_ref':'drv.drv_ti_line_tree_view','form_view_ref':'drv.drv_ti_line_form_view'}"/>
+                    </page>
+                  </notebook>                                      
+                </sheet>
+              </form>           
+            </field>                  
+        </record>
+        <record id='drv_ti_tree_view' model='ir.ui.view'>
+            <field name="name">drv.ti.tree</field>
+            <field name="model">drv.ti</field>  
+            <field name="arch" type="xml"> 
+              <tree default_order='dat desc'>    
+                     <header>
+                        <button name="uradi_update" string="Update stavke" type = "object" class="btn-primary" groups="base.group_no_one" />
+                        <button name="update_kandidati" string="Update kandidati" type = "object" class="btn-primary" groups="base.group_no_one"/>                        
+                    </header>                                   
+                  <field name='dat' />
+                  <field name='ti_status' />     
+                  <field name='sifra' optional="hide" />                                  
+              </tree>           
+            </field>                  
+        </record>          
+        <record id="drv_ti_action" model="ir.actions.act_window">
+            <field name="name">Teorijski ispiti</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">drv.ti</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+               Unesite novi datum za polaganje teorijskog ispita
+              </p>
+            </field>
+        </record> 
+        <record id="drv_ti_line_action" model="ir.actions.act_window">
+            <field name="name">Prijave ispita</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">drv.ti.line</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Create a new candidate in your address book
+              </p><p>
+                Odoo helps you easily track all activities related to a customer.
+              </p>
+            </field>
+        </record>                    
+        <menuitem id="menu_drv_ti" name="Teorijski ispiti" action="drv_ti_action" parent="drv_menuitem_ti" sequence="10"/>  
+        <menuitem id="menu_drv_ti_line" name="Prijavicee" action="drv_ti_line_action" parent="drv_menuitem_ti" sequence="90"  groups="base.group_no_one" />                   
+    </data>
+</odoo>        
